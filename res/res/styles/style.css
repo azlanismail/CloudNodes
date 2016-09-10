@@ -1,0 +1,123 @@
+body {
+	background-color: #FFFFFF; 
+	font-family: Arial, sans-serif; 
+}
+
+h3 {
+	font-size: 2.6ex;
+}
+
+.nav-tabs>li>a, .nav-tabs>li>a:hover {
+	color: #000000;
+}
+/*
+a, a:hover {
+	color: blue;
+}
+
+a:visited {
+	color: #551A8B;
+}*/
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	background-color: #FFFFFF;
+	padding: 20px;
+}
+
+.errorMessage {
+	border-style: solid; 
+	border-width: 1px; 
+	background: #FFFF00;
+	padding: 1ex;
+	margin-top: 1ex; 
+}
+
+.debug {
+	border-style: solid; 
+	border-width: 1px;
+	background: #DDDDDD;  
+}
+
+.singleLink {
+	margin: 1ex; 
+}
+
+table {
+	border-width: 0 0 1px 1px;
+	border-spacing: 0;
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 1em; 
+}
+
+td, th {
+	padding: 4px;
+	border-width: 1px 1px 0 0;
+
+	vertical-align: top;
+	width: 50%;
+}
+
+table.nodeModificationTable td:first-child {
+	width: 150px;
+	text-align: right;
+}
+
+table.nodeModificationTable td {
+	width: auto;
+}
+
+table.nodeModificationTable td input[type=range] {
+    display: inline;
+	width: 140px;
+}
+
+table.nodeModificationTable td input[type=text] {
+	width: 50px;
+	text-align: right;
+}
+
+table.nodeModificationTable td select {
+	width: 100px;
+}
+
+
+table.networkTable td:first-child {
+	width: 150px;
+	text-align: right;
+	font-size: 14px;
+}
+
+table.networkTable td {
+	width: auto;
+}
+
+table.networkTable td input[type=range] {
+    display: inline;
+	width: 140px;
+}
+
+table.networkTable td input[type=text] {
+	width: 100px;
+}
+
+input {
+    background-color: #FFFFFF; 
+    border-style: solid; 
+    border-width: 1px; 
+    border-color: lightgrey;
+    font-size: 13px;
+}
+
+select {
+    font-size: 13px;
+}
+
+#applicationFileUpload {
+	display: inline;
+	border: none;
+	width: 300px;
+}

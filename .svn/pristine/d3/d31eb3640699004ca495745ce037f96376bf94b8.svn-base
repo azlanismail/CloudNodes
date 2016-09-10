@@ -1,0 +1,12 @@
+NodeCount:8
+NodePort:9000
+MonitorAddress:localhost
+MonitorPort:8181
+#ZimoryServer:129.187.228.133
+#ZimoryAPIPath:/ZimoryManage/services/api/
+#ZimoryCertPath:scpapi.pfx
+#ZimoryCertPass:9t97BCIySPRY
+#ZimoryAppliance:24
+#ZimoryNetwork:8
+#BootAddress:141.84.13.168
+#BootPort:9000

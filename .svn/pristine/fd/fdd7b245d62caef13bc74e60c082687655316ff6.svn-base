@@ -1,0 +1,262 @@
+<html>
+<head>
+<title>Science Cloud Platform</title>
+<link rel="stylesheet" type="text/css" href="res/lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="res/lib/bootstrap/css/bootstrap-theme.min.css">
+<script type="text/javascript" src="res/lib/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="res/lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="res/scripts/scripts.js"></script>
+<link rel="stylesheet" type="text/css" href="res/styles/style.css">
+</head>
+
+<body>
+	<div class="center">
+		<div align="center">
+			<a href="/"><img alt="ASCENS Logo" src="res/images/ascens_logo_new.png"></a>
+		</div>
+		<p align="center">
+			SCPi Local Address: <b>${localNode.addressString}:${localNode.port}</b>
+		</p>
+		<ol class="breadcrumb">
+			<li class="active">Node</li>
+		</ol>
+		<h3>Node Information</h3>
+		<table border="1">
+			<tr>
+				<td>Address</td>
+				<td>${localNode.addressString}</td>
+			</tr>
+			<tr>
+				<td>Port</td>
+				<td>${localNode.port}</td>
+			</tr>
+			<tr>
+				<td>Pastry ID</td>
+				<td>${localNode.fullIdString}</td>
+			</tr>
+			
+			#if($localNode.virtualized) 
+			<tr>
+				<td>Virtualization / Deployment ID</td>
+				<td>${localNode.virtualized} / ${localNode.deploymentId}</td>
+			</tr>
+			#else
+			<tr>
+				<td>Virtualization</td>
+				<td>${localNode.virtualized}</td>
+			</tr>
+			#end
+			
+			<tr>
+				<td>CPU Model</td>
+				<td>${localNode.cpuModel}</td>
+			</tr>
+			<tr>
+				<td>CPU Cores / Speed / Load</td>
+				<td>${localNode.cpuCores} / ${localNode.cpuSpeed} MHz / ${localNode.cpuLoad}%</td>
+			</tr>
+			<tr>
+				<td>Memory Total / Used / Free</td>
+				<td>${localNode.memTotal} MB / ${localNode.memUsed} MB / ${localNode.memFree} MB</td>
+			</tr>
+		</table>
+					
+		<div role="tabpanel">
+			<ul class="nav nav-tabs" role="tablist" id="navTabs">
+				<li role="presentation" class="active"><a href="#apps" aria-controls="apps" role="tab" data-toggle="tab">Apps</a></li>
+				<li role="presentation"><a href="#network" aria-controls="network" role="tab" data-toggle="tab">Network</a></li>
+				<li role="presentation"><a href="#mod" aria-controls="mod" role="tab" data-toggle="tab">Node Modification</a></li>
+				<li role="presentation"><a href="#neighbors" aria-controls="neighbors" role="tab" data-toggle="tab">Neighbors</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="apps">
+					<h3>Application deployment</h3>
+					<form id="appUpload" action="app/uploadApp.html" method="POST" enctype="multipart/form-data">
+						<input id="applicationFileUpload" name="file" type="file" />
+						<input id="applicationUploadButton" type="submit" value="Upload application" />
+					</form>
+					
+					<div> 
+						<h3>Known applications</h3>
+						#if($knownApps.empty) 
+							<p>No applications are known.</p>
+						#else 
+							<table border="1">
+							<tr>
+								<th>Name</th>
+								<th>Address</th>
+								<th>Local roles</th>
+								<th></th>
+								<th></th>
+							</tr>
+							#foreach($app in $knownApps) 
+							<tr>
+								<td> <a href="app/$app.name"> $app.name </a></td>
+								#if(!$app.address)
+								<td> </td>
+								#else 
+								<td> $app.address:$app.port </td>
+								#end
+								
+								<td>
+								#foreach ($role in $localNode.appRoles.get($app).entrySet())
+									$role.getKey():$role.getValue()<br>
+								#end
+								</td>
+								
+								<td> 
+									<form method="POST" action="app/info/${app.name}">
+										<input type="submit" value="Details" />
+									</form>
+								</td>
+								<td> 
+									<form method="POST" action="app/delete/${app.name}">
+										<input type="submit" value="Delete" />
+									</form>
+								</td>
+							</tr>
+							#end			
+							</table>
+						#end
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="network">
+					<div>
+						<h3>Connect to network</h3>
+						<table class="networkTable">
+							<tr>
+								<td><label for="ip">IP Address:</label></td>
+								<td><input id="connectionIPText" type="text" length="20" /></td>
+							</tr>
+							<tr>
+								<td><label for="port">Port:</label></td>
+								<td><input id="connectionPortText" type="text" length="20" /></td>
+							</tr>
+							<tr>
+								<td><input id="createConnectionButton" type="submit"value="Create connection" /></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+					<div> 
+						<h3>Start a local node</h3>
+						<table class="networkTable">
+							<tr>
+								<td><label for="port">Port:</label></td>
+								<td><input id="startNodePort" type="text" length="20" /></td>
+							</tr>
+							<tr>
+								<td><input id="startNodeButton" type="submit"value="Start node" /></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="mod">
+					<div>
+						<h3>Node modification</h3>
+						<table class="nodeModificationTable">
+							<tr>
+								<td>
+									<input id="setCPULoadButton" type="submit" value="$setCPULoadText" />
+								</td>
+								<td>
+<!--								<input id="cpuLoadRange" name="cpuLoad" type="range" max="100" min="0" step="0.1" value="$localNode.cpuLoad" onChange="updateTextValue(this.value)" />
+-->									<input id="cpuLoadText" type="text" value="$localNode.cpuLoad" onChange="updateRangeValue(this.value)" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input id="setFullCPULoadButton" type="submit" value="$setFullLoadText" />
+								</td>
+								<td>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input id="setLocationButton" type="submit" value="$setLocationText" />
+								</td>
+								<td>
+									<select id="locationSelect">
+									#foreach($location in $locations)
+										#if ($location == $localNode.location)
+											<option value="$location" selected="selected">$location.getLocationString()</option>
+										#else
+											<option value="$location">$location.getLocationString()</option>
+										#end
+									#end
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input id="setVirtualizedButton" name="action" type="submit" value="$setVirtualizedText" />
+								</td>
+								<td>
+								#if (${localNode.virtualized})
+									<input id="virtualizedCheckbox" type="checkbox" checked="checked"/>
+								#else
+									<input id="virtualizedCheckbox" type="checkbox" />
+								#end
+								</td>
+							</tr>
+							#if($localNode.virtualized)
+							<tr>
+								<td>
+									<input id="setDeploymentIdButton" type="submit" value="$setDeploymentIdText" />
+								</td>
+								<td>
+									<input id="deploymentIdText" name="deploymentId" type="text" value="$localNode.deploymentId" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<input type="submit" value="$stopDeploymentText" />
+								</td>
+								<td>
+								</td>
+							</tr>
+							#end
+						</table>
+						<input id="resetNodeInfoButton" type="submit" value="$resetNodeInfoText" />
+						<input id="shutdownNodeButton" type="submit" value="$shutdownButtonText" />
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="neighbors">
+					<h3>Neighbouring nodes</h3>
+					<div>
+						#if ($knownNodes.empty)
+						<p>No known nodes are around.</p>
+						#else
+						<table border="1">
+							<tr>
+								<th>Address</th>
+								<th>Hashkey</th>
+								<th></th>
+							</tr>
+							#foreach($knownNode in $knownNodes)
+							<tr>
+								<td>${knownNode.addressString}:${knownNode.port}</td>
+								<td>${knownNode.FullIdString}</td>
+								<td>
+									<input class="nodeInfoButton" type="submit" value="Details" name="${knownNode.FullIdString}" />
+								</td>
+							</tr>
+							#end
+						</table>
+						#end
+					</div>
+				</div>
+			</div>
+		</div>
+		<p align="center">
+			<small>
+				The Science Cloud Platform is part of the <a href="http://www.ascens_ist.eu/">ASCENS EU Project</a>.
+			</small>
+		</p>
+	</div>
+</body>
+
+</html>
+

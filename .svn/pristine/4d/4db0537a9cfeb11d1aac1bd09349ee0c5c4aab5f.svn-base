@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//res/res/html/appInfo.html=UTF-8
+encoding//src/eu/ascens_ist/scp/node/NodeEnvironment.java=UTF-8
+encoding//src/eu/ascens_ist/scp/node/core/MonitorClient.java=UTF-8
+encoding//src/eu/ascens_ist/scp/node/core/strategy/gossip/roles/InitiatorRole.java=UTF-8
+encoding//src/eu/ascens_ist/scp/node/info/NodeLocation.java=UTF-8
+encoding//src/eu/ascens_ist/scp/node/webservice/NodeHandler.java=UTF-8

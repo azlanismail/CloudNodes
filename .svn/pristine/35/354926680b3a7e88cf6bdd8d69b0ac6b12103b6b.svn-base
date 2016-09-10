@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Science Cloud Platform</title>
+<link rel="stylesheet" type="text/css" href="res/lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="res/lib/bootstrap/css/bootstrap-theme.min.css">
+<script type="text/javascript" src="res/lib/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="res/lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="res/scripts/scripts.js"></script>
+<link rel="stylesheet" type="text/css" href="res/styles/style.css">
+</head>
+
+<body>
+	<div class="center">
+		<div align="center">
+			<a href="/"><img alt="ASCENS Logo" src="res/images/ascens_logo_new.png"></a>
+		</div>
+		<p align="center">
+			SCPi Local Address: <b>${localNode.addressString}:${localNode.port}</b>
+		</p>
+		<ol class="breadcrumb">
+			<li><a href="javascript:window.history.back();">Node</a></li>
+			<li class="active">${appInfo}</li>
+		</ol>
+		
+		<h3> Application information </h3>
+		
+		<h3> $appInfo </h3>
+		
+		<h3> Participating nodes </h3>
+		<p> Deployed by: $appInfo.DeployedBy </p>
+		<p> Initiated by: $appInfo.InitiatedBy </p>
+		<p> Executed by: $appInfo.ExecutedBy </p>
+		
+		
+		<h3> Requirements </h3>		
+		#foreach($req in $requirements) 
+			<p> $req </p>
+		#end
+
+
+
+	</div>
+	<p align="center">
+		<small>The Science Cloud Platform is part of the <a
+			href="http://www.ascens_ist.eu/">ASCENS EU Project</a>.
+		</small>
+	</p>
+</body>
+</html>

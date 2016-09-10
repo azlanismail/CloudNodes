@@ -1,0 +1,55 @@
+Bundle-Version: 1.0.0.0
+Bundle-SymbolicName: eu.ascens_ist.cloud.node;singleton:=true
+Bundle-Name: Science Cloud Platform
+Bundle-Activator: eu.ascens_ist.scp.node.NodeBundleActivator
+Bundle-ClassPath: .,
+ lib/commons-fileupload-1.3.1.jar,
+ lib/commons-io-2.4.jar,
+ lib/gson-2.3.1.jar,
+ lib/velocity-1.7-dep.jar,
+ lib/velocity-1.7.jar,
+ lib/sigar-bin/lib/sigar.jar,
+ lib/log4j-1.2.17.jar,
+ lib/javax.servlet_3.0.0.v201112011016.jar,
+ lib/jetty-client-8.1.16.v20140903.jar,
+ lib/jetty-continuation-8.1.16.v20140903.jar,
+ lib/jetty-http-8.1.16.v20140903.jar,
+ lib/jetty-io-8.1.16.v20140903.jar,
+ lib/jetty-security-8.1.16.v20140903.jar,
+ lib/jetty-server-8.1.16.v20140903.jar,
+ lib/jetty-servlet-8.1.16.v20140903.jar,
+ lib/jetty-servlets-8.1.16.v20140903.jar,
+ lib/jetty-util-8.1.16.v20140903.jar,
+ lib/scp-iaas.jar
+Bundle-ManifestVersion: 2
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: eu.ascens_ist.scp.node,
+ eu.ascens_ist.scp.node.core,
+ eu.ascens_ist.scp.node.core.exceptions,
+ eu.ascens_ist.scp.node.core.strategy,
+ eu.ascens_ist.scp.node.core.strategy.gossip,
+ eu.ascens_ist.scp.node.core.strategy.gossip.roles,
+ eu.ascens_ist.scp.node.info,
+ eu.ascens_ist.scp.node.logging
+Import-Package: explicit,
+ javax.net.ssl,
+ javax.swing.text,
+ javax.xml.parsers,
+ javax.xml.transform,
+ javax.xml.transform.dom,
+ javax.xml.transform.stream,
+ org.osgi.framework,
+ org.w3c.dom,
+ org.xml.sax,
+ planner,
+ prism,
+ strat
+Require-Bundle: eu.ascens_ist.cloud.pastry;bundle-version="1.0.0",
+ PrismGames;bundle-version="1.0.0"
+Bundle-NativeCode: lib/sigar-bin/lib/sigar-amd64-winnt.dll;osname=win32;processor=x86_64, 
+ lib/sigar-bin/lib/sigar-x86-winnt.dll;lib/sigar-bin/lib/sigar-x86-winnt.lib;osname=win32;processor=x86, 
+ lib/sigar-bin/lib/libsigar-universal-macosx.dylib;osname=Mac OS X;processor=x86, 
+ lib/sigar-bin/lib/libsigar-universal64-macosx.dylib;osname=Mac OS X;processor=x86_64, 
+ lib/sigar-bin/lib/libsigar-amd64-linux.so; osname=Linux;processor=amd64,
+ lib/sigar-bin/lib/libsigar-x86-linux.so; osname=Linux;processor=x86 
+Bundle-ActivationPolicy: lazy
