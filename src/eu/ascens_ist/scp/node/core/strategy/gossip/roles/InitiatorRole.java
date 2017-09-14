@@ -166,8 +166,9 @@ public class InitiatorRole extends HelenaRole {
 					
 					//passing requirements information to the games-based planner
 					appReq = appInfo.getRequirements();
-					//conf = new ConfigurationPlanner();
-					plan = new CompositionalMultiPlanner(1);
+					
+					//call planner
+					plan = new CompositionalMultiPlanner();
 					plan.setApplicationRequirements(0, (int)appReq.getCPUCores(), 
 													(int)appReq.getCPUSpeed(), appReq.getCPULoad(),
 													(int)appReq.getTotalMemory(), (int)appReq.getFreeMemory());
